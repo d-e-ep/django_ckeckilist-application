@@ -1,0 +1,53 @@
+{% extends 'enroll/base.html' %}
+{% block content%}
+<div class="row">
+    <div class="col=sm=6">
+        <h4> class="text=center alert alert=info"Add New Member</h4>
+        <form action="" method="POST">
+         {% csrf_token %}
+         {{form.as_p}}  
+         <input type="submit" class ="btn btn-success" value="Add">
+        </form>
+    </div>
+    <div class="col-sm-8">
+        <h4> class="text-center alert alert-info"Show Candidates Information</h4>
+        {% if cnd %}
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">first_name</th>
+                        <th scope="col">last_name</th>
+                        <th scope="col">email</th>
+                        <th scope="col">mobile_no</th>
+                        <th scope="col">password</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                
+                </thead>
+                <tbody>
+                    {% for cd in cnd %}
+                    <tr>
+                     <th scope="row">{{cd.id}}</th>
+                     <td>{{cd.first_name}}</td>
+                     <td>{{cd.last_name}}</td> 
+                     <td>{{cd.email}}</td>
+                     <td>{{cd.mobile_no}}</td>
+                     <td>{{cd.password}}</td>
+                     <td>
+                         <a href="#" class="btn btn-warning btn-sm">Edit</a>
+                         <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                     </td>
+                
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+         <h4>Table Data</h4>
+        {% else %}
+         <h4 class="text-center alert alert-warning">No Records</h4>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock content%}
